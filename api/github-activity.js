@@ -25,7 +25,12 @@ export default async function handler(req, res) {
 
     const events = await ghRes.json();
 
-    const pushEvents = events.filter((e) => e.type === "PushEvent");
+    // Not every PushEvent has a populated commits array — force-pushes,
+    // branch deletions, and a few other edge cases can leave payload.commits
+    // undefined/null. Filter those out instead of assuming it's always there.
+    const pushEvents = events.filter(
+      (e) => e.type === "PushEvent" && Array.isArray(e.payload?.commits) && e.payload.commits.length > 0
+    );
     const commits = pushEvents
       .flatMap((e) =>
         e.payload.commits.map((c) => ({
@@ -45,12 +50,6 @@ export default async function handler(req, res) {
     res.setHeader("Cache-Control", "s-maxage=600, stale-while-revalidate=600");
     return res.status(200).json({ commits });
   } catch (err) {
-    // TEMP: exposing err.message/name to actually see what's failing in
-    // Vercel's runtime instead of guessing. Safe to remove once resolved —
-    // nothing sensitive here, just diagnostic text.
-    return res.status(500).json({
-      error: "Failed to fetch GitHub activity",
-      debug: { message: err.message, name: err.name },
-    });
+    return res.status(500).json({ error: "Failed to fetch GitHub activity" });
   }
 }
