@@ -77,7 +77,7 @@ export default function Dev() {
         </h2>
         <div className="space-y-10">
           {EXPERIENCE.map((job) => (
-            <div key={job.role} className="grid sm:grid-cols-[1fr_2fr] gap-4 sm:gap-8 border-t border-white/10 pt-6">
+            <div key={job.role} className="grid sm:grid-cols-[1fr_2fr] gap-4 sm:gap-8 pt-6">
               <div>
                 <h3 className="font-mono text-lg text-text">{job.role}</h3>
                 <p className="text-accent text-sm">{job.org}</p>
@@ -101,7 +101,7 @@ export default function Dev() {
         <h2 className="font-mono text-xs text-muted tracking-widest uppercase mb-8">
           02 — Education
         </h2>
-        <div className="grid sm:grid-cols-[1fr_2fr] gap-4 sm:gap-8 border-t border-white/10 pt-6">
+        <div className="grid sm:grid-cols-[1fr_2fr] gap-4 sm:gap-8 pt-6">
           <div>
             <h3 className="font-mono text-lg text-text">{EDUCATION.degree}</h3>
             <p className="text-accent text-sm">{EDUCATION.school}</p>
