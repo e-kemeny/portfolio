@@ -1,33 +1,36 @@
+import HobbyCard from "../components/HobbyCard";
+
 const HOBBIES = [
   {
     tag: "sports",
-    title: "Basketball, baseball & soccer",
-    blurb: "TODO: add a line about how you play — league, pickup games, position, whatever's true.",
+    title: "Second base, top-30 nationally ranked",
+    blurb:
+      "Played second base for The Woodlands High School, a program ranked around the top 30 in the nation. These days it's pickup basketball whenever I can get a run in.",
+    video: null, // drop a clip at /public/videos/sports.mp4 and set video="/videos/sports.mp4"
   },
   {
     tag: "music",
     title: "Producing in FL Studio",
-    blurb: "TODO: link a track, a SoundCloud, or describe your sound/genre.",
+    blurb: "On and off since 2021 — whatever's stuck in my head that week turns into a loop.",
+    video: null,
   },
   {
     tag: "music",
     title: "Violin",
-    blurb: "TODO: performer or student? Any recordings or repertoire worth mentioning.",
+    blurb: "Grew up playing. Not a daily habit anymore, but the training stuck.",
+    video: null,
   },
   {
     tag: "video",
     title: "YouTube",
-    blurb: "TODO: drop your channel link and what you make content about.",
+    blurb: "A channel I've kept going for a while — see for yourself.",
+    video: null,
   },
   {
     tag: "cooking",
-    title: "Cooking — especially chicken",
-    blurb: "TODO: a favorite recipe, technique, or dish you're proud of.",
-  },
-  {
-    tag: "cooking",
-    title: "New York & Neapolitan pizza from scratch",
-    blurb: "TODO: dough recipe, oven setup, or a photo of your best pie.",
+    title: "Neapolitan pizza from scratch",
+    blurb: "Chasing that blistered, leopard-spotted crust — dough, oven, and technique, dialed in over time.",
+    video: null,
   },
 ];
 
@@ -42,31 +45,23 @@ export default function Life() {
           Same person, different directory.
         </h1>
         <p className="text-muted mt-4 max-w-xl text-sm leading-relaxed">
-          Basketball courts, a violin case, an oven that's seen too much flour, and whatever
-          track is loading in FL Studio. This is the rest of it.
+          Second base, a pickup game, FL Studio at 1am, a violin that doesn't come out as often
+          as it used to, and an oven that's seen more flour than it should have. This is the
+          rest of it.
         </p>
       </section>
 
       <section className="max-w-5xl mx-auto px-6 mt-16 grid sm:grid-cols-2 gap-5">
         {HOBBIES.map((h) => (
-          <div
-            key={h.title}
-            className="rounded-lg border border-white/10 bg-surface p-6 hover:border-warm/40 transition-colors"
-          >
-            <span className="inline-block font-data text-[10px] tracking-widest uppercase text-warm mb-3">
-              {h.tag}
-            </span>
-            <h3 className="font-mono text-base text-text mb-2">{h.title}</h3>
-            <p className="text-xs text-muted leading-relaxed">{h.blurb}</p>
-          </div>
+          <HobbyCard key={h.title} {...h} />
         ))}
       </section>
 
       <section className="max-w-5xl mx-auto px-6 mt-24">
         <div className="rounded-lg border border-warm/30 bg-surface p-8 text-center">
-          <h2 className="font-mono text-xl text-text mb-2">Building things outside of code, too.</h2>
+          <h2 className="font-mono text-xl text-text mb-2">There's more than this, too.</h2>
           <p className="text-sm text-muted">
-            Also always tinkering on businesses and side projects — more on that soon.
+            A few other things I'm into aren't up here yet — more to come.
           </p>
         </div>
       </section>

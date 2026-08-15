@@ -15,6 +15,22 @@ export default function Nav() {
         </Link>
 
         <div className="flex items-center gap-3">
+          {/* Resume pill — same outer/inner padding structure as the mode
+              switcher below, so the two stay the same height by construction
+              even though they're separate elements. Always points at
+              public/resume.pdf; swap that file to update it, no code changes. */}
+          <div className="flex items-center rounded-full border border-white/10 bg-surface p-1 font-mono text-xs">
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-colors text-muted hover:text-accent"
+            >
+              <FaFileAlt size={11} />
+              resume
+            </a>
+          </div>
+
           <nav
             className="flex items-center rounded-full border border-white/10 bg-surface p-1 font-mono text-xs"
             aria-label="Site sections"
@@ -36,19 +52,6 @@ export default function Nav() {
               ~/life
             </Link>
           </nav>
-
-          {/* Resume: always points at /resume.pdf in the public folder. To
-              update it, just replace public/resume.pdf with a new file of
-              the exact same name and redeploy — no code changes ever needed. */}
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-1.5 rounded-full border border-white/10 bg-surface px-3 py-1.5 font-mono text-xs text-muted hover:text-accent hover:border-accent/40 transition-colors"
-          >
-            <FaFileAlt size={11} />
-            resume
-          </a>
         </div>
       </div>
     </header>
