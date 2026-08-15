@@ -45,6 +45,12 @@ export default async function handler(req, res) {
     res.setHeader("Cache-Control", "s-maxage=600, stale-while-revalidate=600");
     return res.status(200).json({ commits });
   } catch (err) {
-    return res.status(500).json({ error: "Failed to fetch GitHub activity" });
+    // TEMP: exposing err.message/name to actually see what's failing in
+    // Vercel's runtime instead of guessing. Safe to remove once resolved —
+    // nothing sensitive here, just diagnostic text.
+    return res.status(500).json({
+      error: "Failed to fetch GitHub activity",
+      debug: { message: err.message, name: err.name },
+    });
   }
 }
