@@ -1,3 +1,5 @@
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+
 export default function Footer() {
   const commitSha = import.meta.env.VITE_COMMIT_SHA;
   const repoOwner = import.meta.env.VITE_REPO_OWNER;
@@ -14,23 +16,29 @@ export default function Footer() {
             href="https://github.com/e-kemeny"
             target="_blank"
             rel="noreferrer"
-            className="hover:text-accent transition-colors"
+            aria-label="GitHub"
+            title="GitHub"
+            className="text-muted hover:text-accent transition-colors"
           >
-            github
+            <FaGithub size={18} />
           </a>
           <a
             href="https://www.linkedin.com/in/ethan-kemeny-"
             target="_blank"
             rel="noreferrer"
-            className="hover:text-accent transition-colors"
+            aria-label="LinkedIn"
+            title="LinkedIn"
+            className="text-muted hover:text-accent transition-colors"
           >
-            linkedin
+            <FaLinkedin size={18} />
           </a>
           <a
             href="mailto:ethan.kemeny1@gmail.com"
-            className="hover:text-accent transition-colors"
+            aria-label="Email"
+            title="Email"
+            className="text-muted hover:text-accent transition-colors"
           >
-            email
+            <FaEnvelope size={16} />
           </a>
           {isRealDeploy && (
             <a
@@ -38,7 +46,7 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
               title="View the exact commit deployed on this page"
-              className="flex items-center gap-1.5 hover:text-accent transition-colors border border-white/10 rounded px-2 py-1"
+              className="flex items-center gap-1.5 hover:text-accent transition-colors border border-white/10 rounded px-2 py-1 font-mono text-xs text-muted ml-1"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-accent" />
               {shortSha}
