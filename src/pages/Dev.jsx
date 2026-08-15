@@ -1,6 +1,5 @@
 import BootTerminal from "../components/BootTerminal";
 import GitHubActivity from "../components/GitHubActivity";
-import CopyEmailButton from "../components/CopyEmailButton";
 
 const SKILLS = {
   "Languages": ["Python", "Java", "C", "TypeScript", "MASM Assembly"],
@@ -62,7 +61,7 @@ const PROJECTS = [
 
 export default function Dev() {
   return (
-    <main className="pt-32 pb-24">
+    <main className="pt-32">
       {/* Hero */}
       <section className="max-w-5xl mx-auto px-6">
         <p className="font-mono text-xs text-accent tracking-widest uppercase mb-4">
@@ -218,12 +217,12 @@ export default function Dev() {
             Open to AI/ML engineering opportunities and collaborations.
           </p>
           <div className="flex justify-center gap-4 font-mono text-sm">
-            <CopyEmailButton
-              email="ethan.kemeny1@gmail.com"
+            <a
+              href="mailto:ethan.kemeny1@gmail.com"
               className="rounded-full bg-accent text-base font-bold px-5 py-2 hover:brightness-110 transition"
             >
               Email me
-            </CopyEmailButton>
+            </a>
             <a
               href="https://www.linkedin.com/in/ethan-kemeny-"
               target="_blank"

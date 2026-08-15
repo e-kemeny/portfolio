@@ -1,5 +1,3 @@
-import CopyEmailButton from "./CopyEmailButton";
-
 export default function Footer() {
   const commitSha = import.meta.env.VITE_COMMIT_SHA;
   const repoOwner = import.meta.env.VITE_REPO_OWNER;
@@ -28,9 +26,12 @@ export default function Footer() {
           >
             linkedin
           </a>
-          <CopyEmailButton email="ethan.kemeny1@gmail.com" className="hover:text-accent transition-colors">
+          <a
+            href="mailto:ethan.kemeny1@gmail.com"
+            className="hover:text-accent transition-colors"
+          >
             email
-          </CopyEmailButton>
+          </a>
           {isRealDeploy && (
             <a
               href={`https://github.com/${repoOwner}/${repoSlug}/commit/${commitSha}`}
