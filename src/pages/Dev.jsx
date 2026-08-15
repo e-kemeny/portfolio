@@ -1,4 +1,6 @@
 import BootTerminal from "../components/BootTerminal";
+import GitHubActivity from "../components/GitHubActivity";
+import CopyEmailButton from "../components/CopyEmailButton";
 
 const SKILLS = {
   "Languages": ["Python", "Java", "C", "TypeScript", "MASM Assembly"],
@@ -48,7 +50,12 @@ const EXPERIENCE = [
 ];
 
 const PROJECTS = [
-  { title: "TODO: Project one", blurb: "Add a self-contained ML/AI project here — model, dataset, results.", tag: "TODO" },
+  {
+    title: "Word2Vec From Scratch",
+    blurb: "Building Skip-Gram with Negative Sampling from first principles in PyTorch — no gensim, no pretrained vectors. Now extending it with a sparse, interpretable embedding variant.",
+    tag: "IN PROGRESS",
+    link: "https://github.com/e-kemeny/personal-ai-engineering",
+  },
   { title: "TODO: Project two", blurb: "A tool, agent, or pipeline you built outside of proprietary work.", tag: "TODO" },
   { title: "TODO: Project three", blurb: "Even a small Kaggle write-up counts — proof beats polish.", tag: "TODO" },
 ];
@@ -118,18 +125,31 @@ export default function Dev() {
           03 — Projects
         </h2>
         <div className="grid sm:grid-cols-3 gap-5">
-          {PROJECTS.map((proj) => (
-            <div
-              key={proj.title}
-              className="rounded-lg border border-dashed border-white/15 bg-surface p-5 hover:border-accent/40 transition-colors"
-            >
-              <span className="inline-block font-data text-[10px] tracking-widest uppercase text-warm border border-warm/30 rounded px-2 py-0.5 mb-3">
-                {proj.tag}
-              </span>
-              <h3 className="font-mono text-sm text-text mb-2">{proj.title}</h3>
-              <p className="text-xs text-muted leading-relaxed">{proj.blurb}</p>
-            </div>
-          ))}
+          {PROJECTS.map((proj) => {
+            const isTodo = proj.tag === "TODO";
+            const CardTag = proj.link ? "a" : "div";
+            return (
+              <CardTag
+                key={proj.title}
+                {...(proj.link ? { href: proj.link, target: "_blank", rel: "noreferrer" } : {})}
+                className={`rounded-lg border p-5 transition-colors block ${
+                  isTodo
+                    ? "border-dashed border-white/15 bg-surface hover:border-accent/40"
+                    : "border-solid border-accent/30 bg-surface hover:border-accent"
+                }`}
+              >
+                <span
+                  className={`inline-block font-data text-[10px] tracking-widest uppercase rounded px-2 py-0.5 mb-3 ${
+                    isTodo ? "text-warm border border-warm/30" : "text-accent border border-accent/40"
+                  }`}
+                >
+                  {proj.tag}
+                </span>
+                <h3 className="font-mono text-sm text-text mb-2">{proj.title}</h3>
+                <p className="text-xs text-muted leading-relaxed">{proj.blurb}</p>
+              </CardTag>
+            );
+          })}
         </div>
         <p className="font-data text-xs text-muted mt-4">
           Private work note: much of my recent experience involves production and industry-sponsored
@@ -138,10 +158,20 @@ export default function Dev() {
         </p>
       </section>
 
+      {/* Live activity */}
+      <section className="max-w-5xl mx-auto px-6 mt-28">
+        <h2 className="font-mono text-xs text-muted tracking-widest uppercase mb-8">
+          04 — Recent Activity <span className="text-accent normal-case tracking-normal">(live from GitHub)</span>
+        </h2>
+        <div className="rounded-lg border border-white/10 bg-surface p-6">
+          <GitHubActivity username="e-kemeny" limit={5} />
+        </div>
+      </section>
+
       {/* Skills */}
       <section className="max-w-5xl mx-auto px-6 mt-28">
         <h2 className="font-mono text-xs text-muted tracking-widest uppercase mb-8">
-          04 — Stack
+          05 — Stack
         </h2>
         <div className="grid sm:grid-cols-3 gap-8">
           {Object.entries(SKILLS).map(([cat, items]) => (
@@ -165,7 +195,7 @@ export default function Dev() {
       {/* Achievements */}
       <section className="max-w-5xl mx-auto px-6 mt-28">
         <h2 className="font-mono text-xs text-muted tracking-widest uppercase mb-8">
-          05 — Recognition
+          06 — Recognition
         </h2>
         <ul className="grid sm:grid-cols-3 gap-5">
           {[
@@ -188,12 +218,12 @@ export default function Dev() {
             Open to AI/ML engineering opportunities and collaborations.
           </p>
           <div className="flex justify-center gap-4 font-mono text-sm">
-            <a
-              href="mailto:ethan.kemeny1@gmail.com"
+            <CopyEmailButton
+              email="ethan.kemeny1@gmail.com"
               className="rounded-full bg-accent text-base font-bold px-5 py-2 hover:brightness-110 transition"
             >
               Email me
-            </a>
+            </CopyEmailButton>
             <a
               href="https://www.linkedin.com/in/ethan-kemeny-"
               target="_blank"
