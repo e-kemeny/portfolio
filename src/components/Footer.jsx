@@ -8,8 +8,8 @@ export default function Footer() {
   const shortSha = isRealDeploy ? commitSha.slice(0, 7) : null;
 
   return (
-    <footer className="border-t border-white/10 mt-32">
-      <div className="max-w-5xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-muted">
+    <footer className="mt-32 border-t border-white/10 bg-base/80 backdrop-blur-md">
+      <div className="max-w-5xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-muted">
         <p>© {new Date().getFullYear()} Ethan Kemeny</p>
         <div className="flex items-center gap-5">
           <a
@@ -46,7 +46,7 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
               title="View the exact commit deployed on this page"
-              className="flex items-center gap-1.5 hover:text-accent transition-colors border border-white/10 rounded px-2 py-1 font-mono text-xs text-muted ml-1"
+              className="flex items-center gap-1.5 hover:text-accent transition-colors font-mono text-xs text-muted ml-1"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-accent" />
               {shortSha}
