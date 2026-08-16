@@ -36,7 +36,7 @@ const HOBBIES = [
 
 export default function Life() {
   return (
-    <main className="pt-32 pb-24">
+    <main className="pt-32">
       <section className="max-w-5xl mx-auto px-6">
         <p className="font-mono text-xs text-warm tracking-widest uppercase mb-4">
           // ~/life — everything beyond the keyboard
@@ -57,7 +57,7 @@ export default function Life() {
         ))}
       </section>
 
-      <section className="max-w-5xl mx-auto px-6 mt-24">
+      <section className="max-w-5xl mx-auto px-6 mt-28">
         <div className="rounded-lg border border-warm/30 bg-surface p-8 text-center">
           <h2 className="font-mono text-xl text-text mb-2">There's more than this, too.</h2>
           <p className="text-sm text-muted">
