@@ -1,5 +1,6 @@
 import BootTerminal from "../components/BootTerminal";
 import GitHubActivity from "../components/GitHubActivity";
+import Reveal from "../components/Reveal";
 
 const SKILLS = {
   "Languages": ["Python", "Java", "C", "TypeScript", "MASM Assembly"],
@@ -71,6 +72,7 @@ export default function Dev() {
       </section>
 
       {/* Experience */}
+      <Reveal>
       <section className="max-w-5xl mx-auto px-6 mt-28">
         <h2 className="font-mono text-xs text-muted tracking-widest uppercase mb-8">
           01 — Experience
@@ -95,8 +97,10 @@ export default function Dev() {
           ))}
         </div>
       </section>
+      </Reveal>
 
       {/* Education */}
+      <Reveal>
       <section className="max-w-5xl mx-auto px-6 mt-28">
         <h2 className="font-mono text-xs text-muted tracking-widest uppercase mb-8">
           02 — Education
@@ -117,8 +121,10 @@ export default function Dev() {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* Projects */}
+      <Reveal>
       <section className="max-w-5xl mx-auto px-6 mt-28">
         <h2 className="font-mono text-xs text-muted tracking-widest uppercase mb-8">
           03 — Projects
@@ -156,8 +162,10 @@ export default function Dev() {
           engineering principles in the open.
         </p>
       </section>
+      </Reveal>
 
       {/* Live activity */}
+      <Reveal>
       <section className="max-w-5xl mx-auto px-6 mt-28">
         <h2 className="font-mono text-xs text-muted tracking-widest uppercase mb-8">
           04 — Recent Activity <span className="text-accent normal-case tracking-normal">(live from GitHub)</span>
@@ -166,8 +174,10 @@ export default function Dev() {
           <GitHubActivity username="e-kemeny" limit={5} />
         </div>
       </section>
+      </Reveal>
 
       {/* Skills */}
+      <Reveal>
       <section className="max-w-5xl mx-auto px-6 mt-28">
         <h2 className="font-mono text-xs text-muted tracking-widest uppercase mb-8">
           05 — Stack
@@ -190,8 +200,10 @@ export default function Dev() {
           ))}
         </div>
       </section>
+      </Reveal>
 
       {/* Achievements */}
+      <Reveal>
       <section className="max-w-5xl mx-auto px-6 mt-28">
         <h2 className="font-mono text-xs text-muted tracking-widest uppercase mb-8">
           06 — Recognition
@@ -208,8 +220,10 @@ export default function Dev() {
           ))}
         </ul>
       </section>
+      </Reveal>
 
       {/* Contact */}
+      <Reveal>
       <section className="max-w-5xl mx-auto px-6 mt-28">
         <div className="rounded-lg border border-accent/30 bg-surface p-8 text-center">
           <h2 className="font-mono text-xl text-text mb-2">Let's build something.</h2>
@@ -234,6 +248,7 @@ export default function Dev() {
           </div>
         </div>
       </section>
+      </Reveal>
     </main>
   );
 }

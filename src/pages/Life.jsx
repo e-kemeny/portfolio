@@ -1,4 +1,5 @@
 import HobbyCard from "../components/HobbyCard";
+import Reveal from "../components/Reveal";
 
 const HOBBIES = [
   {
@@ -51,12 +52,15 @@ export default function Life() {
         </p>
       </section>
 
+      <Reveal>
       <section className="max-w-5xl mx-auto px-6 mt-16 grid sm:grid-cols-2 gap-5">
         {HOBBIES.map((h) => (
           <HobbyCard key={h.title} {...h} />
         ))}
       </section>
+      </Reveal>
 
+      <Reveal>
       <section className="max-w-5xl mx-auto px-6 mt-28">
         <div className="rounded-lg border border-warm/30 bg-surface p-8 text-center">
           <h2 className="font-mono text-xl text-text mb-2">There's more than this, too.</h2>
@@ -65,6 +69,7 @@ export default function Life() {
           </p>
         </div>
       </section>
+      </Reveal>
     </main>
   );
 }

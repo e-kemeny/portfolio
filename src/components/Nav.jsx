@@ -15,28 +15,29 @@ export default function Nav() {
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Both pills use an explicit fixed height (h-8) instead of relying
-              on padding math to produce matching heights — guarantees a
-              pixel-perfect match regardless of icon vs. text-only content. */}
-          <div className="flex items-center h-8 rounded-full border border-white/10 bg-surface px-1 font-mono text-xs">
+          {/* Original padding-based sizing (p-1 outer, py-1.5 inner) — the
+              size you liked. leading-none on both pills locks line-height to
+              1 so the icon in the resume pill can't inflate its height
+              relative to the plain-text dev/life pill sitting next to it. */}
+          <div className="flex items-center rounded-full border border-white/10 bg-surface p-1 font-mono text-xs leading-none">
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center h-full gap-1.5 px-3 rounded-full transition-colors text-muted hover:text-accent"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-colors text-muted hover:text-accent leading-none"
             >
-              <FaFileAlt size={11} />
+              <FaFileAlt size={11} className="shrink-0" />
               <span className="hidden sm:inline">resume</span>
             </a>
           </div>
 
           <nav
-            className="flex items-center h-8 rounded-full border border-white/10 bg-surface px-1 font-mono text-xs"
+            className="flex items-center rounded-full border border-white/10 bg-surface p-1 font-mono text-xs leading-none"
             aria-label="Site sections"
           >
             <Link
               to="/"
-              className={`flex items-center h-full px-2.5 sm:px-3 rounded-full transition-colors ${
+              className={`inline-block px-3 py-1.5 rounded-full transition-colors leading-none ${
                 !isLife ? "bg-accent text-base font-bold" : "text-muted hover:text-text"
               }`}
             >
@@ -44,7 +45,7 @@ export default function Nav() {
             </Link>
             <Link
               to="/life"
-              className={`flex items-center h-full px-2.5 sm:px-3 rounded-full transition-colors ${
+              className={`inline-block px-3 py-1.5 rounded-full transition-colors leading-none ${
                 isLife ? "bg-warm text-base font-bold" : "text-muted hover:text-text"
               }`}
             >
