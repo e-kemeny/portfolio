@@ -40,10 +40,10 @@ export default function Life() {
     <main className="pt-32">
       <section className="max-w-5xl mx-auto px-6">
         <p className="font-mono text-xs text-warm tracking-widest uppercase mb-4">
-          // ~/life — everything beyond the keyboard
+          // ~/life — touching grass
         </p>
         <h1 className="font-mono text-3xl sm:text-4xl text-text max-w-2xl leading-snug">
-          Same person, different directory.
+          Beyond the README.
         </h1>
         <p className="text-muted mt-4 max-w-xl text-sm leading-relaxed">
           Second base, a pickup game, FL Studio at 1am, a violin that doesn't come out as often
@@ -63,7 +63,7 @@ export default function Life() {
       <Reveal>
       <section className="max-w-5xl mx-auto px-6 mt-28">
         <div className="rounded-lg border border-warm/30 bg-surface p-8 text-center">
-          <h2 className="font-mono text-xl text-text mb-2">There's more than this, too.</h2>
+          <h2 className="font-mono text-xl text-text mb-2">Other Obsessions</h2>
           <p className="text-sm text-muted">
             A few other things I'm into aren't up here yet — more to come.
           </p>
