@@ -14,13 +14,13 @@ export default function Nav() {
           <span className="animate-blink text-accent">_</span>
         </Link>
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Resume: outer wrapper is pinned to an explicit height (h-9 =
-              36px, matching the dev/life pill's original computed height:
-              16px text line-height + 12px py-1.5 + 8px outer p-1) so it
-              matches exactly regardless of the icon's own size — decoupled
-              from the dev/life pill below, which is untouched original code. */}
-          <div className="flex items-center h-9 rounded-full border border-white/10 bg-surface px-1 font-mono text-xs">
+        <div className="flex items-stretch gap-2 sm:gap-3">
+          {/* Letting flex 'stretch' (the default cross-axis behavior) force
+              this pill to exactly match the dev/life pill's height, rather
+              than me calculating a pixel value by hand — guaranteed correct
+              regardless of font-metric quirks, since the browser measures
+              the actual sibling height itself. */}
+          <div className="flex items-center rounded-full border border-white/10 bg-surface p-1 font-mono text-xs">
             <a
               href="/resume.pdf"
               target="_blank"

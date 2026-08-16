@@ -28,7 +28,10 @@ export default function Reveal({ children, className = "" }) {
           observer.unobserve(node);
         }
       },
-      { threshold: 0.15 }
+      // Shrinks the effective viewport bottom by 15%, so the reveal fires
+      // while the section is still a bit below center-bottom rather than
+      // right at the very edge of the screen.
+      { threshold: 0.15, rootMargin: "0px 0px -15% 0px" }
     );
     observer.observe(node);
     return () => observer.disconnect();
