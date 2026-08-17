@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 const RESPONSES = {
   help: "available commands: ls, whoami, sudo, cd ~, home, exit",
   ls: "resume.pdf  regrets.txt  the-page-you-wanted.md (not found)",
-  whoami: "a lost visitor. it happens to the best of us.",
+  whoami: "wrong page for an existential crisis.",
   "sudo rm -rf /": "nice try. permission denied — this isn't that kind of website.",
-  sudo: "permission denied. this incident will not be reported, because nothing happened.",
-  exit: "you can't exit a website. but you can go home.",
+  sudo: "permission denied, this incident will not be reported.",
+  exit: "bold of you to assume there's an exit.",
+  hire: "finally, a useful command.\n→ initializing contact...",
 };
 
 export default function NotFound() {
@@ -15,7 +16,7 @@ export default function NotFound() {
   const [history, setHistory] = useState([
     { type: "system", text: "$ cd /the-page-you-were-looking-for" },
     { type: "error", text: "bash: cd: no such file or directory" },
-    { type: "system", text: "// try typing a command below, or just `cd ~` to go home" },
+    { type: "system", text: "// try a command, or `cd ~` to go home" },
   ]);
   const [input, setInput] = useState("");
 
