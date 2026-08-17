@@ -8,7 +8,6 @@ const RESPONSES = {
   "sudo rm -rf /": "nice try. permission denied — this isn't that kind of website.",
   sudo: "permission denied, this incident will not be reported.",
   exit: "bold of you to assume there's an exit.",
-  hire: "finally, a useful command.\n→ initializing contact...",
 };
 
 export default function NotFound() {
@@ -16,7 +15,7 @@ export default function NotFound() {
   const [history, setHistory] = useState([
     { type: "system", text: "$ cd /the-page-you-were-looking-for" },
     { type: "error", text: "bash: cd: no such file or directory" },
-    { type: "system", text: "// try a command, or `cd ~` to go home" },
+    { type: "system", text: "// try typing a command below, or just `cd ~` to go home" },
   ]);
   const [input, setInput] = useState("");
 
@@ -24,9 +23,29 @@ export default function NotFound() {
     const cmd = raw.trim().toLowerCase();
     if (!cmd) return;
 
+    // Documented, always-available navigation
     if (cmd === "cd ~" || cmd === "cd" || cmd === "home") {
       setHistory((h) => [...h, { type: "input", text: cmd }, { type: "system", text: "$ cd ~ ... redirecting home" }]);
       setTimeout(() => navigate("/"), 700);
+      return;
+    }
+
+    // Undocumented easter eggs — not listed under `help` on purpose
+    if (cmd === "touch grass") {
+      setHistory((h) => [...h, { type: "input", text: cmd }, { type: "system", text: "redirecting to ~/life..." }]);
+      setTimeout(() => navigate("/life"), 800);
+      return;
+    }
+    if (cmd === "hire") {
+      setHistory((h) => [
+        ...h,
+        { type: "input", text: cmd },
+        { type: "output", text: "finally, a useful command." },
+        { type: "system", text: "→ initializing contact..." },
+      ]);
+      setTimeout(() => {
+        window.location.href = "mailto:ethan.kemeny1@gmail.com?subject=Let's talk";
+      }, 900);
       return;
     }
 
