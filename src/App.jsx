@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
@@ -7,8 +7,11 @@ import Life from "./pages/Life";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
+  const { pathname } = useLocation();
+  const isLife = pathname.startsWith("/life");
+
   return (
-    <div className="min-h-screen bg-base bg-grid text-text font-sans">
+    <div className={`min-h-screen bg-base bg-grid text-text font-sans ${isLife ? "theme-life" : ""}`}>
       <Nav />
       <Routes>
         <Route path="/" element={<Dev />} />

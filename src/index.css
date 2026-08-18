@@ -68,7 +68,18 @@ a:focus-visible, button:focus-visible {
   outline-offset: 3px;
 }
 
-/* Themed scrollbar site-wide instead of the default white/gray browser one */
+/* Themed scrollbar — dimmed/muted at rest so it does not shout, brightens
+   to the full accent color on hover. Color is page-aware: green by default
+   (dev + 404 pages), orange on the life page via the .theme-life class set
+   in App.jsx based on route. */
+:root {
+  --scroll-thumb: #1E7A47;
+  --scroll-thumb-hover: #39FF88;
+}
+.theme-life {
+  --scroll-thumb: #8A5A2E;
+  --scroll-thumb-hover: #F2A65A;
+}
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -77,14 +88,14 @@ a:focus-visible, button:focus-visible {
   background: #0B0D10;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1D2126;
+  background: var(--scroll-thumb);
   border-radius: 999px;
   border: 2px solid #0B0D10;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #39FF88;
+  background: var(--scroll-thumb-hover);
 }
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1D2126 #0B0D10;
+  scrollbar-color: var(--scroll-thumb) #0B0D10;
 }
