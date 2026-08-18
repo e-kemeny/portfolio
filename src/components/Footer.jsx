@@ -1,4 +1,5 @@
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import EmailLink from "./EmailLink";
 
 export default function Footer() {
   const commitSha = import.meta.env.VITE_COMMIT_SHA;
@@ -32,14 +33,14 @@ export default function Footer() {
           >
             <FaLinkedin size={18} />
           </a>
-          <a
-            href="mailto:ethan.kemeny1@gmail.com"
+          <EmailLink
+            email="ethan.kemeny1@gmail.com"
             aria-label="Email"
-            title="Email"
+            title="Email — click to copy if it doesn't open your mail app"
             className="text-muted hover:text-accent transition-colors"
           >
             <FaEnvelope size={16} />
-          </a>
+          </EmailLink>
           {isRealDeploy && (
             <a
               href={`https://github.com/${repoOwner}/${repoSlug}/commit/${commitSha}`}

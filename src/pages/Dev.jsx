@@ -1,6 +1,7 @@
 import BootTerminal from "../components/BootTerminal";
 import GitHubActivity from "../components/GitHubActivity";
 import Reveal from "../components/Reveal";
+import EmailLink from "../components/EmailLink";
 
 const SKILLS = {
   "Languages": ["Python", "Java", "C", "TypeScript", "MASM Assembly"],
@@ -231,12 +232,12 @@ export default function Dev() {
             Open to AI/ML engineering opportunities and collaborations.
           </p>
           <div className="flex justify-center gap-4 font-mono text-sm">
-            <a
-              href="mailto:ethan.kemeny1@gmail.com"
+            <EmailLink
+              email="ethan.kemeny1@gmail.com"
               className="rounded-full bg-accent text-base font-bold px-5 py-2 hover:brightness-110 transition"
             >
               Email me
-            </a>
+            </EmailLink>
             <a
               href="https://www.linkedin.com/in/ethan-kemeny-"
               target="_blank"
