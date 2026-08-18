@@ -1,7 +1,10 @@
+import { useLocation } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import EmailLink from "./EmailLink";
 
 export default function Footer() {
+  const { pathname } = useLocation();
+  const isLife = pathname.startsWith("/life");
   const commitSha = import.meta.env.VITE_COMMIT_SHA;
   const repoOwner = import.meta.env.VITE_REPO_OWNER;
   const repoSlug = import.meta.env.VITE_REPO_SLUG;
@@ -49,7 +52,7 @@ export default function Footer() {
               title="View the exact commit deployed on this page"
               className="flex items-center gap-1.5 hover:text-accent transition-colors font-mono text-xs text-muted ml-1"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              <span className={`w-1.5 h-1.5 rounded-full ${isLife ? "bg-warm" : "bg-accent"}`} />
               {shortSha}
             </a>
           )}
