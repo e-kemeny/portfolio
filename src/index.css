@@ -68,15 +68,9 @@ a:focus-visible, button:focus-visible {
   outline-offset: 3px;
 }
 
-/* Main page scrollbar: blends into the background at rest (clean, not
-   loud), pops to the theme's accent color only on hover. Green by default
-   (dev + 404 pages), orange on the life page via .theme-life on <html>. */
-:root {
-  --scroll-thumb-hover: #39FF88;
-}
-.theme-life {
-  --scroll-thumb-hover: #F2A65A;
-}
+/* Scrollbar — neutral gray everywhere (main page and the 404 terminal
+   box alike), a touch lighter on hover. No per-page color theming — kept
+   simple and consistent site-wide instead. */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -85,26 +79,14 @@ a:focus-visible, button:focus-visible {
   background: #0B0D10;
 }
 ::-webkit-scrollbar-thumb {
-  background: #15181C;
+  background: #1D2126;
   border-radius: 999px;
   border: 2px solid #0B0D10;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--scroll-thumb-hover);
+  background: #2A2E33;
 }
 * {
   scrollbar-width: thin;
-  scrollbar-color: #15181C #0B0D10;
-}
-
-/* The 404 page's internal terminal scroll box is exempt from theming —
-   stays plain neutral gray always, same as before this whole feature. */
-.terminal-scroll::-webkit-scrollbar-thumb {
-  background: #1D2126 !important;
-}
-.terminal-scroll::-webkit-scrollbar-thumb:hover {
-  background: #2A2E33 !important;
-}
-.terminal-scroll {
-  scrollbar-color: #1D2126 #0B0D10 !important;
+  scrollbar-color: #1D2126 #0B0D10;
 }
