@@ -9,9 +9,9 @@ export default function Nav() {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-base/80 backdrop-blur-md">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
         <Link to="/" className="font-mono text-xs sm:text-sm tracking-tight text-text">
-          ethan<span className="text-accent">@</span>kemeny
+          ethan<span className={isLife ? "text-warm" : "text-accent"}>@</span>kemeny
           <span className="text-muted">:~$</span>
-          <span className="animate-blink text-accent">_</span>
+          <span className={`animate-blink ${isLife ? "text-warm" : "text-accent"}`}>_</span>
         </Link>
 
         <div className="flex items-stretch gap-2 sm:gap-3">
