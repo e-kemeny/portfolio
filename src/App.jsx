@@ -18,9 +18,11 @@ export default function App() {
     document.documentElement.classList.toggle("theme-life", isLife);
   }, [isLife]);
 
+  const isKnownRoute = pathname === "/" || pathname === "/life";
+
   return (
     <div className="min-h-screen bg-base bg-grid text-text font-sans">
-      <Nav />
+      {isKnownRoute && <Nav />}
       <Routes>
         <Route path="/" element={<Dev />} />
         <Route path="/life" element={<Life />} />

@@ -60,7 +60,7 @@ export default function NotFound() {
   };
 
   return (
-    <main className="pt-32 pb-24 min-h-screen">
+    <main className="pt-16 pb-24 min-h-screen">
       <section className="max-w-2xl mx-auto px-6">
         <p className="font-mono text-xs text-accent tracking-widest uppercase mb-4">
           // 404 — not found
