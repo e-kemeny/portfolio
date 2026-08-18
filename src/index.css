@@ -20,26 +20,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* dark, on-theme scrollbar instead of the default white/gray OS one */
-html {
-  scrollbar-width: thin;
-  scrollbar-color: #39FF88 #15181C;
-}
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #0B0D10;
-}
-::-webkit-scrollbar-thumb {
-  background: #1D2126;
-  border-radius: 6px;
-  border: 2px solid #0B0D10;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #39FF88;
-}
-
 ::selection {
   background-color: #39FF88;
   color: #0B0D10;
@@ -68,9 +48,13 @@ a:focus-visible, button:focus-visible {
   outline-offset: 3px;
 }
 
-/* Scrollbar — neutral gray everywhere (main page and the 404 terminal
-   box alike), a touch lighter on hover. No per-page color theming — kept
-   simple and consistent site-wide instead. */
+/* Scrollbar — neutral gray everywhere (main page and the 404 terminal box
+   alike), a touch lighter on hover. Single source of truth, no duplicate
+   rules elsewhere in this file. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #1D2126 #0B0D10;
+}
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -85,8 +69,4 @@ a:focus-visible, button:focus-visible {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #2A2E33;
-}
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #1D2126 #0B0D10;
 }
