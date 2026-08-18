@@ -76,7 +76,7 @@ export default function NotFound() {
             <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
             <span className="ml-3 font-data text-[11px] text-muted">not-found.sh</span>
           </div>
-          <div className="p-6 font-data text-sm leading-relaxed max-h-80 overflow-y-auto">
+          <div className="terminal-scroll p-6 font-data text-sm leading-relaxed max-h-80 overflow-y-auto">
             {history.map((line, i) => (
               <div
                 key={i}
