@@ -51,12 +51,12 @@ const EXPERIENCE = [
 ];
 
 const PROJECTS = [
-  {
-    title: "Word2Vec From Scratch",
-    blurb: "Built Skip-Gram with Negative Sampling from scratch in PyTorch, then added L1-regularized sparse embeddings to test the sparsity-vs-quality tradeoff. Pushing 57% of parameters to zero cut prediction loss 35% — but collapsed WordSim-353 correlation to near zero, a clean case of an optimization metric improving while representation quality didn't.",
-    tag: "COMPLETE",
-    link: "https://github.com/e-kemeny/personal-ai-engineering",
-  },
+{
+  title: "Sparse Word2Vec From Scratch",
+  blurb: "Built Skip-Gram with Negative Sampling from scratch in PyTorch, scaled training to 1M Text8 tokens, and tested L1-regularized sparse embeddings. Increasing sparsity from 0.9% to 57.4% progressively degraded WordSim-353 semantic quality, revealing a clear sparsity-quality tradeoff.",
+  tag: "COMPLETE",
+  link: "https://github.com/e-kemeny/personal-ai-engineering/tree/main/word2vec",
+},
   { title: "TODO: Project two", blurb: "A tool, agent, or pipeline you built outside of proprietary work.", tag: "TODO" },
   { title: "TODO: Project three", blurb: "Even a small Kaggle write-up counts — proof beats polish.", tag: "TODO" },
 ];
