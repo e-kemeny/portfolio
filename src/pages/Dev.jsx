@@ -53,8 +53,8 @@ const EXPERIENCE = [
 const PROJECTS = [
   {
     title: "Word2Vec From Scratch",
-    blurb: "Building Skip-Gram with Negative Sampling from first principles in PyTorch — no gensim, no pretrained vectors. Now extending it with a sparse, interpretable embedding variant.",
-    tag: "IN PROGRESS",
+    blurb: "Built Skip-Gram with Negative Sampling from scratch in PyTorch, then added L1-regularized sparse embeddings to test the sparsity-vs-quality tradeoff. Pushing 57% of parameters to zero cut prediction loss 35% — but collapsed WordSim-353 correlation to near zero, a clean case of an optimization metric improving while representation quality didn't.",
+    tag: "COMPLETE",
     link: "https://github.com/e-kemeny/personal-ai-engineering",
   },
   { title: "TODO: Project two", blurb: "A tool, agent, or pipeline you built outside of proprietary work.", tag: "TODO" },
