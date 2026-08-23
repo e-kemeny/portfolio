@@ -63,6 +63,7 @@ const PROJECTS = [
     blurb:
       "Building an automated content pipeline that turns raw gameplay into publish-ready videos using intelligent clip detection, editing, metadata generation, and automated YouTube publishing.",
     tag: "IN PROGRESS",
+    link: "https://github.com/e-kemeny/automated-content-pipeline",
   },
   {
     title: "Orvo",
