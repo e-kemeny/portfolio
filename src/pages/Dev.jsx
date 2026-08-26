@@ -61,13 +61,25 @@ const EXPERIENCE = [
 
 const PROJECTS = [
   {
-    title: "Word2Vec From Scratch",
-    blurb: "Built Skip-Gram with Negative Sampling from scratch in PyTorch, then added L1-regularized sparse embeddings to test the sparsity-vs-quality tradeoff. Pushing 57% of parameters to zero cut prediction loss 35% — but collapsed WordSim-353 correlation to near zero, a clean case of an optimization metric improving while representation quality didn't.",
+    title: "Sparse Word2Vec From Scratch",
+    blurb:
+      "Built Skip-Gram with Negative Sampling from scratch in PyTorch, scaled training to 1M Text8 tokens, and tested L1-regularized sparse embeddings. Increasing sparsity from 0.9% to 57.4% progressively degraded WordSim-353 semantic quality, revealing a clear sparsity-quality tradeoff.",
     tag: "COMPLETE",
-    link: "https://github.com/e-kemeny/personal-ai-engineering",
+    link: "https://github.com/e-kemeny/personal-ai-engineering/tree/main/word2vec",
   },
-  { title: "TODO: Project two", blurb: "A tool, agent, or pipeline you built outside of proprietary work.", tag: "TODO" },
-  { title: "TODO: Project three", blurb: "Even a small Kaggle write-up counts — proof beats polish.", tag: "TODO" },
+  {
+    title: "Autonomous Video Pipeline",
+    blurb:
+      "Building an automated content pipeline that turns raw gameplay into publish-ready videos using intelligent clip detection, editing, metadata generation, and automated YouTube publishing.",
+    tag: "IN PROGRESS",
+    link: "https://github.com/e-kemeny/automated-content-pipeline",
+  },
+  {
+    title: "Orvo",
+    blurb:
+      "An ML performance regression tool designed to detect when code, dependency, or environment changes silently make AI workloads slower or less efficient.",
+    tag: "COMING SOON",
+  },
 ];
 
 export default function Dev() {
