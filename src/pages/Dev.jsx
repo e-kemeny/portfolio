@@ -39,22 +39,22 @@ const EXPERIENCE = [
     ],
   },
   {
-    role: "AI Fellow",
-    org: "Break Through Tech — Cornell Tech",
-    period: "12-month fellowship · selected from 4,300+ applicants",
+    role: "Microsoft AI/ML Project",
+    org: "GitHub Repository Trust Signals · Break Through Tech × Microsoft",
+    period: "Aug 2026 – Present",
     points: [
-      "Building real-world machine learning solutions alongside engineers & mentors",
-      "Strengthening technical and professional AI skills through structured mentorship",
+      "Collaborating on a Microsoft-sponsored AI/ML challenge to develop data-driven signals for evaluating the trust and quality of public GitHub repositories",
+      "Exploring repository activity, maintenance history, contributor networks, and other GitHub data to engineer and evaluate predictive trust signals",
+      "Developing an interpretable ML approach for repository-level trust scoring backed by explainable evidence",
     ],
   },
   {
-    role: "ML Apprentice",
-    org: "Break Through Tech — Apprenticeship",
-    period: "Aug 2026 – Present · Remote",
+    role: "AI/ML Fellow",
+    org: "Break Through Tech — Cornell Tech",
+    period: "12-month fellowship · selected from 4,300+ applicants",
     points: [
-      "Collaborating on a Microsoft-sponsored AI/ML project building trust signals for public GitHub repositories",
-      "Analyzing repository activity, maintenance history, and contributor networks to engineer predictive trust features",
-      "Developing an interpretable ML approach that produces explainable, repository-level trust scores",
+      "Completed 135 hours of machine learning foundations covering supervised learning, neural networks, deep learning, LLMs, RAG, and agentic workflows",
+      "Advanced into the industry AI Studio to apply machine learning to a real-world Microsoft-sponsored challenge",
     ],
   },
 ];
