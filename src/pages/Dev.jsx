@@ -59,8 +59,9 @@ const EXPERIENCE = [
     org: "Break Through Tech — Cornell Tech",
     period: "12-month fellowship · selected from 4,300+ applicants",
     points: [
-      "Completed 135 hours of machine learning foundations covering supervised learning, neural networks, deep learning, LLMs, RAG, and agentic workflows",
-      "Advanced into the industry AI Studio to apply machine learning to a real-world Microsoft-sponsored challenge",
+      "Completed 135 hours of applied AI/ML training spanning supervised learning, neural networks, model evaluation, LLMs, RAG, and agentic systems",
+      "Built end-to-end ML and AI systems including neural network classifiers, document and NL2SQL RAG pipelines, multimodal extraction workflows, and MCP-connected agents",
+      "Designed agentic workflows using routing, evaluator-optimizer loops, structured outputs, tool use, and dynamically discovered MCP services",
     ],
   },
 ];
