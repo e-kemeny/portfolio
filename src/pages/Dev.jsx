@@ -46,7 +46,7 @@ const EXPERIENCE = [
   },
   {
     role: "Microsoft AI/ML Project",
-    org: "GitHub Repository Trust Signals · Break Through Tech × Microsoft",
+    org: "GitHub Repository Trust Signals · Microsoft × Break Through Tech",
     period: "Current",
     points: [
       "Collaborating on a Microsoft-sponsored AI/ML challenge to develop data-driven signals for evaluating the trust and quality of public GitHub repositories",
