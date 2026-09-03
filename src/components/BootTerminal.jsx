@@ -12,7 +12,7 @@ const LINES = [
   },
   { text: "$ ./run --mission", delay: 3100 },
   {
-    text: "> Transforming possibility into meaning.",
+    text: "> Transforming possibility into purpose.",
     delay: 3600,
     accent: true,
   },
