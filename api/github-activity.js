@@ -49,9 +49,9 @@ export default async function handler(req, res) {
       })
     );
 
-    const commits = results.filter((r) => r.status === "fulfilled").map((r) => r.value);
+    const commits = results.filter((r) => r.status === "fulfilled").map((r) => r.value).sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    res.setHeader("Cache-Control", "s-maxage=600, stale-while-revalidate=600");
+    res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=60");
     return res.status(200).json({ commits });
   } catch (err) {
     return res.status(500).json({ error: "Failed to fetch GitHub activity" });

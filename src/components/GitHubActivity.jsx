@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 
 const CACHE_KEY = "gh_activity_cache_v3";
 
-const CACHE_TTL_MS = 5 * 60 * 1000; // client-side cache, shorter than the server cache
+const CACHE_TTL_MS = 60 * 1000; // client-side cache, shorter than the server cache
 
 function timeAgo(dateStr) {
   const diffMs = Date.now() - new Date(dateStr).getTime();
