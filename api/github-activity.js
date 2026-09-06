@@ -2,58 +2,78 @@
 //
 // WHY THIS EXISTS: calling GitHub's public API directly from the browser
 // means every visitor's IP address shares the same 60-requests/hour quota.
-// Routing through here + edge caching means GitHub only gets called once
-// every ~10 minutes total, no matter how much site traffic there is.
+// Routing through here + edge caching keeps GitHub API traffic low.
 //
-// IMPORTANT SHAPE NOTE: GitHub's /events/public endpoint no longer includes
-// a `commits` array on PushEvent payloads — only `head` and `before` SHAs.
-// (Older docs/examples online still show a `commits` array; that's stale.)
-// So for each push we fetch the actual commit at `head` separately to get
-// its real message.
+// This version fetches recently pushed public repos, then reads their actual
+// commit history directly instead of relying on GitHub's delayed events feed.
 
 export default async function handler(req, res) {
   const username = req.query.username || "e-kemeny";
   const limit = 5;
 
   try {
-    const ghRes = await fetch(`https://api.github.com/users/${username}/events/public`, {
-      headers: { "User-Agent": "ethankemeny.com" },
-    });
+    const headers = {
+      "User-Agent": "ethankemeny.com",
+      Accept: "application/vnd.github+json",
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+    };
 
-    if (!ghRes.ok) {
-      return res.status(ghRes.status).json({ error: "GitHub API error", status: ghRes.status });
+    const reposRes = await fetch(
+      `https://api.github.com/users/${username}/repos?sort=pushed&per_page=10`,
+      { headers }
+    );
+
+    if (!reposRes.ok) {
+      return res.status(reposRes.status).json({
+        error: "GitHub API error",
+        status: reposRes.status,
+      });
     }
 
-    const events = await ghRes.json();
-    const pushEvents = events.filter((e) => e.type === "PushEvent" && e.payload?.head).slice(0, limit);
+    const repos = await reposRes.json();
 
-    // Fetch the real commit message for each push's head SHA. Resilient to
-    // individual failures — one bad fetch shouldn't blank out the rest.
     const results = await Promise.allSettled(
-      pushEvents.map(async (e) => {
-        const commitRes = await fetch(
-          `https://api.github.com/repos/${e.repo.name}/commits/${e.payload.head}`,
-          { headers: { "User-Agent": "ethankemeny.com" } }
+      repos.map(async (repo) => {
+        const commitsRes = await fetch(
+          `https://api.github.com/repos/${repo.full_name}/commits?per_page=${limit}`,
+          { headers }
         );
-        if (!commitRes.ok) throw new Error(`commit fetch failed: ${commitRes.status}`);
-        const commitData = await commitRes.json();
 
-        return {
-          repo: e.repo.name.split("/")[1],
-          repoUrl: `https://github.com/${e.repo.name}`,
-          message: commitData.commit.message.split("\n")[0],
-          sha: e.payload.head.slice(0, 7),
-          url: `https://github.com/${e.repo.name}/commit/${e.payload.head}`,
-          date: e.created_at,
-        };
+        if (!commitsRes.ok) {
+          throw new Error(`commit fetch failed: ${commitsRes.status}`);
+        }
+
+        const commits = await commitsRes.json();
+
+        return commits.map((commit) => ({
+          repo: repo.name,
+          repoUrl: repo.html_url,
+          message: commit.commit.message.split("\n")[0],
+          sha: commit.sha.slice(0, 7),
+          url: commit.html_url,
+          date:
+            commit.commit.author?.date ||
+            commit.commit.committer?.date,
+        }));
       })
     );
 
-    const commits = results.filter((r) => r.status === "fulfilled").map((r) => r.value).sort((a, b) => new Date(b.date) - new Date(a.date));
+    const commits = results
+      .filter((r) => r.status === "fulfilled")
+      .flatMap((r) => r.value)
+      .filter((c) => c.date)
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, limit);
 
-    res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=60");
+    res.setHeader(
+      "Cache-Control",
+      "s-maxage=60, stale-while-revalidate=60"
+    );
+
     return res.status(200).json({ commits });
   } catch (err) {
-    return res.status(500).json({ error: "Failed to fetch GitHub activity" });
+    return res.status(500).json({
+      error: "Failed to fetch GitHub activity",
+    });
   }
 }
