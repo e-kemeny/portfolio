@@ -2,6 +2,7 @@ import BootTerminal from "../components/BootTerminal";
 import GitHubActivity from "../components/GitHubActivity";
 import Reveal from "../components/Reveal";
 import EmailLink from "../components/EmailLink";
+import { useRef, useState } from "react";
 
 const SKILLS = {
   Languages: ["Python", "Java", "C", "TypeScript", "MASM Assembly"],
@@ -68,11 +69,11 @@ const EXPERIENCE = [
 
 const PROJECTS = [
   {
-  title: "AURA",
-  blurb:
-    "Adaptive AI tutoring platform combining course knowledge with student mastery to personalize learning through a dual-context RAG architecture.",
-  tag: "HACKWESTX VII WINNER",
-  link: "https://github.com/e-kemeny/hackwestx-2026-404_Brain_Not_Found",
+    title: "AURA",
+    blurb:
+      "Adaptive AI tutoring platform combining course knowledge with student mastery to personalize learning through a dual-context RAG architecture.",
+    tag: "HACKWESTX VII WINNER",
+    link: "https://github.com/e-kemeny/hackwestx-2026-404_Brain_Not_Found",
   },
   {
     title: "Sparse Word2Vec From Scratch",
@@ -93,7 +94,6 @@ const PROJECTS = [
     blurb:
       "An ML performance regression tool designed to detect when code, dependency, or environment changes silently make AI workloads slower or less efficient.",
     tag: "COMING SOON",
-    className: "sm:col-start-2",
   },
 ];
 
@@ -188,52 +188,7 @@ export default function Dev() {
       {/* Projects */}
       <Reveal>
         <section className="max-w-5xl mx-auto px-6 mt-28">
-          <h2 className="font-mono text-xs text-muted tracking-widest uppercase mb-8">
-            03 — Projects
-          </h2>
-
-          <div className="grid sm:grid-cols-3 gap-5">
-            {PROJECTS.map((proj) => {
-              const isComplete = proj.tag === "COMPLETE";
-              const CardTag = proj.link ? "a" : "div";
-
-              return (
-                <CardTag
-                  key={proj.title}
-                  {...(proj.link
-                    ? {
-                        href: proj.link,
-                        target: "_blank",
-                        rel: "noreferrer",
-                      }
-                    : {})}
-                  className={`rounded-lg border p-5 transition-colors block ${proj.className || ""} ${
-                    isComplete
-                      ? "border-solid border-accent/30 bg-surface hover:border-accent"
-                      : "border-dashed border-warm/30 bg-surface hover:border-warm"
-                  }`}
-                >
-                  <span
-                    className={`inline-block font-data text-[10px] tracking-widest uppercase rounded px-2 py-0.5 mb-3 ${
-                      isComplete
-                        ? "text-accent border border-accent/40"
-                        : "text-warm border border-warm/40"
-                    }`}
-                  >
-                    {proj.tag}
-                  </span>
-
-                  <h3 className="font-mono text-sm text-text mb-2">
-                    {proj.title}
-                  </h3>
-
-                  <p className="text-xs text-muted leading-relaxed">
-                    {proj.blurb}
-                  </p>
-                </CardTag>
-              );
-            })}
-          </div>
+          <ProjectRail projects={PROJECTS} />
 
           <p className="font-data text-xs text-muted mt-4">
             Private work note: much of my recent experience involves
@@ -347,5 +302,103 @@ export default function Dev() {
         </section>
       </Reveal>
     </main>
+  );
+}
+
+function ProjectRail({ projects }) {
+  const railRef = useRef(null);
+  const [index, setIndex] = useState(0);
+  const [atEnd, setAtEnd] = useState(false);
+
+  function handleScroll() {
+    const el = railRef.current;
+    if (!el) return;
+
+    const card = el.firstElementChild;
+    if (!card) return;
+
+    const step = card.offsetWidth + 20;
+
+    setIndex(Math.round(el.scrollLeft / step));
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 8);
+  }
+
+  return (
+    <>
+      <div className="flex items-baseline justify-between mb-8">
+        <h2 className="font-mono text-xs text-muted tracking-widest uppercase">
+          03 — Projects
+        </h2>
+
+        <span className="font-data text-xs text-muted tabular-nums">
+          {String(Math.min(index + 1, projects.length)).padStart(2, "0")} /{" "}
+          {String(projects.length).padStart(2, "0")}
+        </span>
+      </div>
+
+      <div className="relative">
+        <div
+          ref={railRef}
+          onScroll={handleScroll}
+          className="flex gap-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {projects.map((proj) => {
+            const isComplete =
+              proj.tag === "COMPLETE" ||
+              proj.tag === "HACKWESTX VII WINNER";
+
+            const CardTag = proj.link ? "a" : "div";
+
+            return (
+              <CardTag
+                key={proj.title}
+                {...(proj.link
+                  ? {
+                      href: proj.link,
+                      target: "_blank",
+                      rel: "noreferrer",
+                    }
+                  : {})}
+                className={`snap-start shrink-0 basis-[86%] sm:basis-[calc((100%-2.5rem)/3)] rounded-lg border p-5 transition-colors block ${
+                  isComplete
+                    ? "border-solid border-accent/30 bg-surface hover:border-accent"
+                    : "border-dashed border-warm/30 bg-surface hover:border-warm"
+                }`}
+              >
+                <span
+                  className={`inline-block font-data text-[10px] tracking-widest uppercase rounded px-2 py-0.5 mb-3 ${
+                    isComplete
+                      ? "text-accent border border-accent/40"
+                      : "text-warm border border-warm/40"
+                  }`}
+                >
+                  {proj.tag}
+                </span>
+
+                <h3 className="font-mono text-sm text-text mb-2">
+                  {proj.title}
+                </h3>
+
+                <p className="text-xs text-muted leading-relaxed">
+                  {proj.blurb}
+                </p>
+              </CardTag>
+            );
+          })}
+        </div>
+
+        <div
+          className={`pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-20 flex items-center justify-end pr-1 bg-gradient-to-l from-base to-transparent transition-opacity duration-300 ${
+            atEnd ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <span className="font-mono text-sm text-muted">→</span>
+        </div>
+      </div>
+
+      <p className="font-data text-[10px] tracking-widest uppercase text-muted/60 mt-3 text-center sm:text-right">
+        scroll / swipe →
+      </p>
+    </>
   );
 }
