@@ -68,6 +68,13 @@ const EXPERIENCE = [
 
 const PROJECTS = [
   {
+  title: "AURA",
+  blurb:
+    "Adaptive AI tutoring platform combining course knowledge with student mastery to personalize learning through a dual-context RAG architecture.",
+  tag: "HACKWESTX VII WINNER",
+  link: "https://github.com/e-kemeny/hackwestx-2026-404_Brain_Not_Found",
+  },
+  {
     title: "Sparse Word2Vec From Scratch",
     blurb:
       "Built Skip-Gram with Negative Sampling from scratch in PyTorch, scaled training to 1M Text8 tokens, and tested L1-regularized sparse embeddings. Increasing sparsity from 0.9% to 57.4% progressively degraded WordSim-353 semantic quality, revealing a clear sparsity-quality tradeoff.",
@@ -86,6 +93,7 @@ const PROJECTS = [
     blurb:
       "An ML performance regression tool designed to detect when code, dependency, or environment changes silently make AI workloads slower or less efficient.",
     tag: "COMING SOON",
+    className: "sm:col-start-2",
   },
 ];
 
@@ -199,7 +207,7 @@ export default function Dev() {
                         rel: "noreferrer",
                       }
                     : {})}
-                  className={`rounded-lg border p-5 transition-colors block ${
+                  className={`rounded-lg border p-5 transition-colors block ${proj.className || ""} ${
                     isComplete
                       ? "border-solid border-accent/30 bg-surface hover:border-accent"
                       : "border-dashed border-warm/30 bg-surface hover:border-warm"
