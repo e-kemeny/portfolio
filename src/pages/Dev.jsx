@@ -131,7 +131,7 @@ export default function Dev() {
                     {job.org}
                   </p>
 
-                    <p className="font-data text-xs text-muted mt-8">                    {job.period}
+                    <p className="font-data text-xs text-muted mt-1">                    {job.period}
                   </p>
                 </div>
 
@@ -393,11 +393,12 @@ function ProjectRail({ projects }) {
         </div>
 
         <div
-          className={`pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-24 flex items-center justify-end pr-2 bg-gradient-to-l from-[#0B0D10] via-[#0B0D10]/95 to-transparent transition-opacity duration-300 ${          }`}
+          className={`pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-24 flex items-center justify-end pr-2 bg-gradient-to-l from-[#0B0D10] via-[#0B0D10]/95 to-transparent transition-opacity duration-300 ${
+            atEnd ? "opacity-0" : "opacity-100"
+          }`}
         >
           <span className="font-mono text-sm text-muted">→</span>
         </div>
-      </div>
 
         <p className="font-data text-[10px] tracking-widest uppercase text-muted/60 mt-2 text-center sm:text-right">        scroll / swipe →
       </p>
