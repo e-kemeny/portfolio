@@ -307,10 +307,7 @@ export default function Dev() {
 
 function ProjectRail({ projects }) {
   const railRef = useRef(null);
-
   const [index, setIndex] = useState(0);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
 
   function handleScroll() {
     const el = railRef.current;
@@ -320,8 +317,6 @@ function ProjectRail({ projects }) {
 
     if (maxScroll <= 0) {
       setIndex(0);
-      setAtStart(true);
-      setAtEnd(true);
       return;
     }
 
@@ -329,8 +324,6 @@ function ProjectRail({ projects }) {
     const nextIndex = Math.round(progress * (projects.length - 1));
 
     setIndex(nextIndex);
-    setAtStart(el.scrollLeft <= 8);
-    setAtEnd(el.scrollLeft >= maxScroll - 8);
   }
 
   return (
@@ -352,78 +345,54 @@ function ProjectRail({ projects }) {
         </div>
       </div>
 
-      <div className="relative">
-        <div
-          ref={railRef}
-          onScroll={handleScroll}
-          className={`flex gap-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
-            atStart
-              ? "pr-6 sm:pr-8"
-              : atEnd
-              ? "pl-6 sm:pl-8"
-              : "px-6 sm:px-8"
-          }`}
-        >
-          {projects.map((proj) => {
-            const isComplete =
-              proj.tag === "COMPLETE" ||
-              proj.tag === "HACKWESTX VII WINNER";
+      <div
+        ref={railRef}
+        onScroll={handleScroll}
+        className="flex gap-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {projects.map((proj) => {
+          const isComplete =
+            proj.tag === "COMPLETE" ||
+            proj.tag === "HACKWESTX VII WINNER";
 
-            const CardTag = proj.link ? "a" : "div";
+          const CardTag = proj.link ? "a" : "div";
 
-            return (
-              <CardTag
-                key={proj.title}
-                {...(proj.link
-                  ? {
-                      href: proj.link,
-                      target: "_blank",
-                      rel: "noreferrer",
-                    }
-                  : {})}
-                className={`snap-start shrink-0 basis-[86%] sm:basis-[calc((100%-2.5rem)/3)] rounded-lg border p-5 transition-colors block ${
+          return (
+            <CardTag
+              key={proj.title}
+              {...(proj.link
+                ? {
+                    href: proj.link,
+                    target: "_blank",
+                    rel: "noreferrer",
+                  }
+                : {})}
+              className={`snap-center shrink-0 w-[88%] sm:w-[calc((100%-2.5rem)/3)] rounded-lg border p-5 transition-colors block ${
+                isComplete
+                  ? "border-solid border-accent/30 bg-surface hover:border-accent"
+                  : "border-dashed border-warm/30 bg-surface hover:border-warm"
+              }`}
+            >
+              <span
+                className={`inline-block font-data text-[10px] tracking-widest uppercase rounded px-2 py-0.5 mb-3 ${
                   isComplete
-                    ? "border-solid border-accent/30 bg-surface hover:border-accent"
-                    : "border-dashed border-warm/30 bg-surface hover:border-warm"
+                    ? "text-accent border border-accent/40"
+                    : "text-warm border border-warm/40"
                 }`}
               >
-                <span
-                  className={`inline-block font-data text-[10px] tracking-widest uppercase rounded px-2 py-0.5 mb-3 ${
-                    isComplete
-                      ? "text-accent border border-accent/40"
-                      : "text-warm border border-warm/40"
-                  }`}
-                >
-                  {proj.tag}
-                </span>
+                {proj.tag}
+              </span>
 
-                <h3 className="font-mono text-sm text-text mb-2">
-                  {proj.title}
-                </h3>
+              <h3 className="font-mono text-sm text-text mb-2">
+                {proj.title}
+              </h3>
 
-                <p className="text-xs text-muted leading-relaxed">
-                  {proj.blurb}
-                </p>
-              </CardTag>
-            );
-          })}
-        </div>
-
-        <div
-          className={`pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-12 flex items-center justify-start pl-1 bg-gradient-to-r from-[#0B0D10] via-[#0B0D10]/95 to-transparent transition-opacity duration-300 ${
-            atStart ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          <span className="font-mono text-sm text-muted/60">←</span>
-        </div>
-
-        <div
-          className={`pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-12 flex items-center justify-end pr-1 bg-gradient-to-l from-[#0B0D10] via-[#0B0D10]/95 to-transparent transition-opacity duration-300 ${
-            atEnd ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          <span className="font-mono text-sm text-muted/60">→</span>
-        </div>
+              <p className="text-xs text-muted leading-relaxed">
+                {proj.blurb}
+              </p>
+            </CardTag>
+          );
+        })}
       </div>
     </>
   );
