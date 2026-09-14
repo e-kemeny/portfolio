@@ -131,8 +131,7 @@ export default function Dev() {
                     {job.org}
                   </p>
 
-                  <p className="font-data text-xs text-muted mt-1">
-                    {job.period}
+                    <p className="font-data text-xs text-muted mt-8">                    {job.period}
                   </p>
                 </div>
 
@@ -190,7 +189,7 @@ export default function Dev() {
         <section className="max-w-5xl mx-auto px-6 mt-28">
           <ProjectRail projects={PROJECTS} />
 
-          <p className="font-data text-xs text-muted mt-4">
+          <p className="font-data text-xs text-muted mt-8">
             Private work note: much of my recent experience involves
             production and industry-sponsored systems that can't be shared
             publicly — the projects above will demonstrate the same
@@ -314,13 +313,19 @@ function ProjectRail({ projects }) {
     const el = railRef.current;
     if (!el) return;
 
-    const card = el.firstElementChild;
-    if (!card) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
 
-    const step = card.offsetWidth + 20;
+    if (maxScroll <= 0) {
+      setIndex(0);
+      setAtEnd(true);
+      return;
+    }
 
-    setIndex(Math.round(el.scrollLeft / step));
-    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 8);
+    const progress = el.scrollLeft / maxScroll;
+    const nextIndex = Math.round(progress * (projects.length - 1));
+
+    setIndex(nextIndex);
+    setAtEnd(el.scrollLeft >= maxScroll - 8);
   }
 
   return (
@@ -388,16 +393,13 @@ function ProjectRail({ projects }) {
         </div>
 
         <div
-          className={`pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-20 flex items-center justify-end pr-1 bg-gradient-to-l from-base to-transparent transition-opacity duration-300 ${
-            atEnd ? "opacity-0" : "opacity-100"
-          }`}
+          className={`pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-24 flex items-center justify-end pr-2 bg-gradient-to-l from-[#0B0D10] via-[#0B0D10]/95 to-transparent transition-opacity duration-300 ${          }`}
         >
           <span className="font-mono text-sm text-muted">→</span>
         </div>
       </div>
 
-      <p className="font-data text-[10px] tracking-widest uppercase text-muted/60 mt-3 text-center sm:text-right">
-        scroll / swipe →
+        <p className="font-data text-[10px] tracking-widest uppercase text-muted/60 mt-2 text-center sm:text-right">        scroll / swipe →
       </p>
     </>
   );
