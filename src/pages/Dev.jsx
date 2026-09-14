@@ -340,17 +340,29 @@ function ProjectRail({ projects }) {
           03 — Projects
         </h2>
 
-        <span className="font-data text-xs text-muted/60 tabular-nums">
-          {String(Math.min(index + 1, projects.length)).padStart(2, "0")} /{" "}
-          {String(projects.length).padStart(2, "0")}
-        </span>
+        <div className="flex items-center gap-6">
+          <span className="font-data text-[10px] tracking-widest uppercase text-muted/60 hidden sm:inline">
+            scroll / swipe →
+          </span>
+
+          <span className="font-data text-xs text-muted/60 tabular-nums">
+            {String(Math.min(index + 1, projects.length)).padStart(2, "0")} /{" "}
+            {String(projects.length).padStart(2, "0")}
+          </span>
+        </div>
       </div>
 
       <div className="relative">
         <div
           ref={railRef}
           onScroll={handleScroll}
-          className="flex gap-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth px-6 sm:px-8 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className={`flex gap-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+            atStart
+              ? "pr-6 sm:pr-8"
+              : atEnd
+              ? "pl-6 sm:pl-8"
+              : "px-6 sm:px-8"
+          }`}
         >
           {projects.map((proj) => {
             const isComplete =
@@ -413,10 +425,6 @@ function ProjectRail({ projects }) {
           <span className="font-mono text-sm text-muted/60">→</span>
         </div>
       </div>
-
-      <p className="font-data text-[10px] tracking-widest uppercase text-muted/60 mt-2 text-center sm:text-right">
-        scroll / swipe →
-      </p>
     </>
   );
 }
