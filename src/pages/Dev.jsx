@@ -131,7 +131,8 @@ export default function Dev() {
                     {job.org}
                   </p>
 
-                    <p className="font-data text-xs text-muted mt-1">                    {job.period}
+                  <p className="font-data text-xs text-muted mt-1">
+                    {job.period}
                   </p>
                 </div>
 
@@ -399,8 +400,10 @@ function ProjectRail({ projects }) {
         >
           <span className="font-mono text-sm text-muted">→</span>
         </div>
+      </div>
 
-        <p className="font-data text-[10px] tracking-widest uppercase text-muted/60 mt-2 text-center sm:text-right">        scroll / swipe →
+      <p className="font-data text-[10px] tracking-widest uppercase text-muted/60 mt-2 text-center sm:text-right">
+        scroll / swipe →
       </p>
     </>
   );
