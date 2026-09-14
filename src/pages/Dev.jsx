@@ -307,7 +307,9 @@ export default function Dev() {
 
 function ProjectRail({ projects }) {
   const railRef = useRef(null);
+
   const [index, setIndex] = useState(0);
+  const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
 
   function handleScroll() {
@@ -318,6 +320,7 @@ function ProjectRail({ projects }) {
 
     if (maxScroll <= 0) {
       setIndex(0);
+      setAtStart(true);
       setAtEnd(true);
       return;
     }
@@ -326,6 +329,7 @@ function ProjectRail({ projects }) {
     const nextIndex = Math.round(progress * (projects.length - 1));
 
     setIndex(nextIndex);
+    setAtStart(el.scrollLeft <= 8);
     setAtEnd(el.scrollLeft >= maxScroll - 8);
   }
 
@@ -336,7 +340,7 @@ function ProjectRail({ projects }) {
           03 — Projects
         </h2>
 
-        <span className="font-data text-xs text-muted tabular-nums">
+        <span className="font-data text-xs text-muted/60 tabular-nums">
           {String(Math.min(index + 1, projects.length)).padStart(2, "0")} /{" "}
           {String(projects.length).padStart(2, "0")}
         </span>
@@ -346,7 +350,7 @@ function ProjectRail({ projects }) {
         <div
           ref={railRef}
           onScroll={handleScroll}
-          className="flex gap-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex gap-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth px-6 sm:px-8 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {projects.map((proj) => {
             const isComplete =
@@ -393,14 +397,20 @@ function ProjectRail({ projects }) {
           })}
         </div>
 
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-24 flex items-center justify-end pr-2 bg-gradient-to-l from-[#0B0D10] via-[#0B0D10]/95 to-transparent">
-          <span
-            className={`font-mono text-sm text-muted transition-opacity duration-300 ${
-              atEnd ? "opacity-0" : "opacity-100"
-            }`}
-          >
-            →
-          </span>
+        <div
+          className={`pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-12 flex items-center justify-start pl-1 bg-gradient-to-r from-[#0B0D10] via-[#0B0D10]/95 to-transparent transition-opacity duration-300 ${
+            atStart ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <span className="font-mono text-sm text-muted/60">←</span>
+        </div>
+
+        <div
+          className={`pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-12 flex items-center justify-end pr-1 bg-gradient-to-l from-[#0B0D10] via-[#0B0D10]/95 to-transparent transition-opacity duration-300 ${
+            atEnd ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <span className="font-mono text-sm text-muted/60">→</span>
         </div>
       </div>
 
