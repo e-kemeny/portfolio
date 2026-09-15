@@ -307,7 +307,10 @@ export default function Dev() {
 
 function ProjectRail({ projects }) {
   const railRef = useRef(null);
+
   const [index, setIndex] = useState(0);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
 
   function handleScroll() {
     const el = railRef.current;
@@ -317,6 +320,8 @@ function ProjectRail({ projects }) {
 
     if (maxScroll <= 0) {
       setIndex(0);
+      setAtStart(true);
+      setAtEnd(true);
       return;
     }
 
@@ -324,6 +329,31 @@ function ProjectRail({ projects }) {
     const nextIndex = Math.round(progress * (projects.length - 1));
 
     setIndex(nextIndex);
+    setAtStart(el.scrollLeft <= 8);
+    setAtEnd(el.scrollLeft >= maxScroll - 8);
+  }
+
+  function handleWheel(event) {
+    const el = railRef.current;
+    if (!el) return;
+
+    const maxScroll = el.scrollWidth - el.clientWidth;
+
+    if (maxScroll <= 0) return;
+
+    const movingRight = event.deltaY > 0;
+    const movingLeft = event.deltaY < 0;
+
+    const canMoveRight = el.scrollLeft < maxScroll - 1;
+    const canMoveLeft = el.scrollLeft > 1;
+
+    if (
+      (movingRight && canMoveRight) ||
+      (movingLeft && canMoveLeft)
+    ) {
+      event.preventDefault();
+      el.scrollLeft += event.deltaY;
+    }
   }
 
   return (
@@ -333,22 +363,23 @@ function ProjectRail({ projects }) {
           03 — Projects
         </h2>
 
-        <div className="flex items-center gap-6">
-          <span className="font-data text-[10px] tracking-widest uppercase text-muted/60 hidden sm:inline">
-            scroll / swipe →
-          </span>
+        <div className="flex items-center gap-2 font-data text-xs text-muted/60 tabular-nums">
+          {!atStart && <span>←</span>}
 
-          <span className="font-data text-xs text-muted/60 tabular-nums">
+          <span>
             {String(Math.min(index + 1, projects.length)).padStart(2, "0")} /{" "}
             {String(projects.length).padStart(2, "0")}
           </span>
+
+          {!atEnd && <span>→</span>}
         </div>
       </div>
 
       <div
         ref={railRef}
         onScroll={handleScroll}
-        className="flex gap-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        onWheel={handleWheel}
+        className="flex gap-4 sm:gap-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth pb-1 px-[10%] sm:px-0 cursor-grab active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {projects.map((proj) => {
           const isComplete =
@@ -367,7 +398,7 @@ function ProjectRail({ projects }) {
                     rel: "noreferrer",
                   }
                 : {})}
-              className={`snap-center shrink-0 w-[88%] sm:w-[calc((100%-2.5rem)/3)] rounded-lg border p-5 transition-colors block ${
+              className={`snap-center shrink-0 w-[80%] sm:w-[calc((100%-2.5rem)/3)] rounded-lg border p-5 transition-colors block ${
                 isComplete
                   ? "border-solid border-accent/30 bg-surface hover:border-accent"
                   : "border-dashed border-warm/30 bg-surface hover:border-warm"
