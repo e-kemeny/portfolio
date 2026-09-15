@@ -309,6 +309,7 @@ function ProjectRail({ projects }) {
   const railRef = useRef(null);
 
   const [index, setIndex] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
 
@@ -356,6 +357,8 @@ function ProjectRail({ projects }) {
     }
   }
 
+  const displayIndex = hoveredIndex ?? index;
+
   return (
     <>
       <div className="flex items-baseline justify-between mb-8">
@@ -364,14 +367,14 @@ function ProjectRail({ projects }) {
         </h2>
 
         <div className="flex items-center gap-2 font-data text-xs text-muted/60 tabular-nums">
-          {!atStart && <span>←</span>}
+          {displayIndex > 0 && <span>←</span>}
 
           <span>
-            {String(Math.min(index + 1, projects.length)).padStart(2, "0")} /{" "}
+            {String(displayIndex + 1).padStart(2, "0")} /{" "}
             {String(projects.length).padStart(2, "0")}
           </span>
 
-          {!atEnd && <span>→</span>}
+          {displayIndex < projects.length - 1 && <span>→</span>}
         </div>
       </div>
 
@@ -381,7 +384,7 @@ function ProjectRail({ projects }) {
         onWheel={handleWheel}
         className="flex gap-4 sm:gap-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth pb-1 px-[10%] sm:px-0 cursor-grab active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {projects.map((proj) => {
+        {projects.map((proj, projectIndex) => {
           const isComplete =
             proj.tag === "COMPLETE" ||
             proj.tag === "HACKWESTX VII WINNER";
@@ -391,6 +394,8 @@ function ProjectRail({ projects }) {
           return (
             <CardTag
               key={proj.title}
+              onMouseEnter={() => setHoveredIndex(projectIndex)}
+              onMouseLeave={() => setHoveredIndex(null)}
               {...(proj.link
                 ? {
                     href: proj.link,
