@@ -390,7 +390,7 @@ function ProjectRail({ projects }) {
 
       <div
         ref={railRef}
-        onWheel={handleWheel}
+        onWheel={handleScroll}
         className="flex gap-4 sm:gap-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth pb-1 px-[10%] sm:px-0 cursor-grab active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {projects.map((proj, projectIndex) => {
