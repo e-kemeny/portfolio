@@ -71,7 +71,7 @@ const PROJECTS = [
   {
     title: "AURA",
     blurb:
-      "Adaptive AI tutoring platform combining course knowledge with student mastery to personalize learning through a dual-context RAG architecture.",
+      "Built a dual-context RAG tutoring system that combines professor-provided course knowledge with concept-level student mastery to personalize practice and explanations. Won Best Use of Backboard at HackWesTX VII, testing distinct mastery profiles across 4 concepts and verifying persistent mastery updates from 0% to 8% after a correct response.",
     tag: "HACKWESTX VII WINNER",
     link: "https://github.com/e-kemeny/hackwestx-2026-404_Brain_Not_Found",
   },
@@ -85,7 +85,7 @@ const PROJECTS = [
   {
     title: "Autonomous Video Pipeline",
     blurb:
-      "Building an automated content pipeline that turns raw gameplay into publish-ready videos using intelligent clip detection, editing, metadata generation, and automated YouTube publishing.",
+      "Building a Python + FFmpeg pipeline that analyzes raw gameplay and automatically identifies highlight candidates using audio intensity and event scoring. Processes per-second audio signals, ranks candidate timestamps, and generates 15-second clip windows, with automated editing, metadata generation, and YouTube publishing in development.",
     tag: "IN PROGRESS",
     link: "https://github.com/e-kemeny/automated-content-pipeline",
   },
