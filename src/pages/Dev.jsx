@@ -373,15 +373,6 @@ function ProjectRail({ projects }) {
     };
   }, []);
 
-    el.addEventListener("wheel", handleWheel, {
-      passive: false,
-    });
-
-    return () => {
-      el.removeEventListener("wheel", handleWheel);
-    };
-  }, []);
-
   const displayIndex = hoveredIndex ?? index;
 
   return (
@@ -405,7 +396,7 @@ function ProjectRail({ projects }) {
 
       <div
         ref={railRef}
-        onWheel={handleScroll}
+        onScroll={handleScroll}
         className="flex gap-4 sm:gap-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth pb-1 px-[10%] sm:px-0 cursor-grab active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {projects.map((proj, projectIndex) => {
