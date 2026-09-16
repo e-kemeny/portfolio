@@ -354,9 +354,24 @@ function ProjectRail({ projects }) {
         (movingLeft && canMoveLeft)
       ) {
         event.preventDefault();
-        el.scrollLeft += event.deltaY;
+
+        const direction = movingRight ? 1 : -1;
+
+        el.scrollBy({
+          left: direction * 300,
+          behavior: "smooth",
+        });
       }
     }
+
+    el.addEventListener("wheel", handleWheel, {
+      passive: false,
+    });
+
+    return () => {
+      el.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
 
     el.addEventListener("wheel", handleWheel, {
       passive: false,
